@@ -34,7 +34,7 @@ function redondearPrecio($precio) {
     return round($precio * 20) / 20;
 }
 
-$precios = [9.99, 10.49, 20.05, 5.75];
+$precios = [9.99, 10.49, 20.05, 5.75, 15.33, 7.89];
 echo "</br>Precios originales y redondeados:</br>";
 foreach ($precios as $precio) {
     echo "Original: $precio, Redondeado: " . redondearPrecio($precio) . "</br>";
