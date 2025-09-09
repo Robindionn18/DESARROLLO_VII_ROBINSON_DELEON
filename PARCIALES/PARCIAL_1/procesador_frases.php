@@ -16,23 +16,11 @@
     <h1>Procesador de Frases</h1>
     
     <?php
-    $nombre = "Juan";
-    $edad = 25;
-    $habilidades = ["PHP", "HTML", "CSS", "JavaScript"];
+    $frases = ["Hola a todos", "El pajaro pajaro esta en la casa", "seis de sies objetos recuperados", "La lechuga morada y lechuga verde son vegetales"];
+    
     ?>
 
-    <h2>Información Personal</h2>
-    <p>Nombre: <span class="destacado"><?php echo $nombre; ?></span></p>
-    <p>Edad: <?= $edad ?> años</p>
-
-    <h2>Habilidades</h2>
-    <ul>
-        <?php foreach ($habilidades as $habilidad): ?>
-            <li><?= $habilidad ?></li>
-        <?php endforeach; ?>
-    </ul>
-
-    <h2>Tabla de Multiplicar</h2>
+    <h2>Frases</h2>
     <table>
         <tr>
             <th>Número</th>
@@ -49,16 +37,6 @@
             </tr>
         <?php endfor; ?>
     </table>
-
-    <h2>Contenido Condicional</h2>
-    <?php if ($edad >= 18): ?>
-        <p>Eres mayor de edad.</p>
-    <?php else: ?>
-        <p>Eres menor de edad.</p>
-    <?php endif; ?>
-
-    <h2>Fecha y Hora Actual</h2>
-    <p>La fecha y hora actual es: <?= date('Y-m-d H:i:s') ?></p>
 </body>
 </html>
     

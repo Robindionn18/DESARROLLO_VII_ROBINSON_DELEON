@@ -13,10 +13,8 @@
     </style>
 </head>
 <body>
-    <h1>Integración de PHP con HTML</h1>
+    <h1>Gestion de membresias</h1>
     
-
-    // 
     <?php
     
 include 'funciones_gimansio.php';
@@ -50,33 +48,6 @@ foreach($miembros as $miembros => $valor){
         <?php endforeach; ?>
     </ul>
 
-    <h2>Tabla de Multiplicar</h2>
-    <table>
-        <tr>
-            <th>Número</th>
-            <?php for ($i = 1; $i <= 5; $i++): ?>
-                <th><?= $i ?></th>
-            <?php endfor; ?>
-        </tr>
-        <?php for ($i = 1; $i <= 10; $i++): ?>
-            <tr>
-                <th><?= $i ?></th>
-                <?php for ($j = 1; $j <= 5; $j++): ?>
-                    <td><?= $i * $j ?></td>
-                <?php endfor; ?>
-            </tr>
-        <?php endfor; ?>
-    </table>
-
-    <h2>Contenido Condicional</h2>
-    <?php if ($edad >= 18): ?>
-        <p>Eres mayor de edad.</p>
-    <?php else: ?>
-        <p>Eres menor de edad.</p>
-    <?php endif; ?>
-
-    <h2>Fecha y Hora Actual</h2>
-    <p>La fecha y hora actual es: <?= date('Y-m-d H:i:s') ?></p>
 </body>
 </html>
     
