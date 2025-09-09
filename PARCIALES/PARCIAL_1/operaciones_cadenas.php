@@ -2,12 +2,16 @@
 
 //Contar palabras repetidas
 
+function contar_palabras_repetidas($texto) {
 
-$contar_palabras_repetidas = 4 ;
+}
+
 
 //Capitalizar palabras
 
-$capitalizar_palabras= 5;
+function capitalizar_palabras($texto) {
+
+}
 
 
 
