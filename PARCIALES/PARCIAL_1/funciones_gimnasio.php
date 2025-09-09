@@ -20,7 +20,6 @@ function calcular_promocion($antiguedad_meses) {
     echo "No aplica para descuento<br>";
 }
 return $descuento;
-echo "<br>";
 }
 
 
