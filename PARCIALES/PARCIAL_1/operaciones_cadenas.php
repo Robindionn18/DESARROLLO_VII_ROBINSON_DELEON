@@ -3,6 +3,9 @@
 //Contar palabras repetidas
 
 function contar_palabras_repetidas($texto) {
+$textoMinusculas = strtolower($texto);
+$textoMinusculas = trim($textoMinusculas);   
+$frase_array = explode(" ", $textoMinusculas);
 
 }
 
@@ -10,7 +13,7 @@ function contar_palabras_repetidas($texto) {
 //Capitalizar palabras
 
 function capitalizar_palabras($texto) {
-
+    
 }
 
 

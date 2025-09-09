@@ -13,31 +13,13 @@
     </style>
 </head>
 <body>
-    <h1>Integración de PHP con HTML</h1>
+    <h1>Procesador de Frases</h1>
     
-
-    // 
     <?php
-    
-include 'funciones_gimansio.php';
-
-$membresias = ["basica" => 80 , "premium" => 120 , "vip" => 180, "familiar" => 250 , "corporativa" => 300];
-
-$miembros = [
-    "Juan Pérez" => ["tipo" => "premium", "antiguedad" => 15],
-    "Ana García" => ["tipo" => "basica", "antiguedad" => 2],
-    "Carlos López" => ["tipo" => "vip", "antiguedad" => 30],
-    "María Rodríguez" => ["tipo" => "familiar", "antiguedad" => 8],
-    "Luis Martínez" => ["tipo" => "corporativa", "antiguedad" => 18],
-];
-
-foreach($miembros as $miembros => $valor){
-    echo "$clave: $valor<br>";
-}
-
+    $nombre = "Juan";
+    $edad = 25;
+    $habilidades = ["PHP", "HTML", "CSS", "JavaScript"];
     ?>
-
-    //
 
     <h2>Información Personal</h2>
     <p>Nombre: <span class="destacado"><?php echo $nombre; ?></span></p>
@@ -80,10 +62,3 @@ foreach($miembros as $miembros => $valor){
 </body>
 </html>
     
-
-
-
-
-<?php
-
-?>
