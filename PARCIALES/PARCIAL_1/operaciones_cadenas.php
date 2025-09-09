@@ -15,7 +15,7 @@ return $frase_array;
 function capitalizar_palabras($texto) {
     $TextoCantidad = strlen($texto);
     $TextoMayuscula = strtoupper($texto);
-    return $texto;
+    return $TextoMayuscula;
 
 }
 
