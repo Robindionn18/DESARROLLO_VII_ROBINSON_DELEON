@@ -16,6 +16,7 @@
     <h1>Procesador de Frases</h1>
     
     <?php
+    include 'operaciones_cadenas.php';
     $frases = ["Hola a todos", "El pajaro pajaro esta en la casa", "seis de sies objetos recuperados", "La lechuga morada y lechuga verde son vegetales"];
     
     ?>
@@ -23,19 +24,14 @@
     <h2>Frases</h2>
     <table>
         <tr>
-            <th>Número</th>
-            <?php for ($i = 1; $i <= 5; $i++): ?>
-                <th><?= $i ?></th>
-            <?php endfor; ?>
+            <th>Frase</th>
+                <th>Frases repetidas</th>
+                <th>Palabras Capitalizadas</th>
         </tr>
-        <?php for ($i = 1; $i <= 10; $i++): ?>
             <tr>
-                <th><?= $i ?></th>
-                <?php for ($j = 1; $j <= 5; $j++): ?>
-                    <td><?= $i * $j ?></td>
-                <?php endfor; ?>
-            </tr>
-        <?php endfor; ?>
+                <th></th>
+                    <td></td>
+                </tr>
     </table>
 </body>
 </html>

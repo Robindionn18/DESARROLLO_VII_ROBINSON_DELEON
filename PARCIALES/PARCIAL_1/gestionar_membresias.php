@@ -35,13 +35,12 @@ foreach($miembros as $miembros => $valor){
 
     ?>
 
-    //
-
     <h2>Información Personal</h2>
     <p>Nombre: <span class="destacado"><?php echo $nombre; ?></span></p>
-    <p>Edad: <?= $edad ?> años</p>
+    <p>Membresia: <?= $membresias?> años</p>
+    <p>Antiguedad: 
 
-    <h2>Habilidades</h2>
+    <h2>Precios Calculados:</h2>
     <ul>
         <?php foreach ($habilidades as $habilidad): ?>
             <li><?= $habilidad ?></li>
