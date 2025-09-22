@@ -1,0 +1,26 @@
+[
+    {
+        "class": "Gerente",
+        "nombre": "Ana López",
+        "idEmpleado": 1001,
+        "salarioBase": 4725,
+        "departamento": "Ventas",
+        "bono": 2000
+    },
+    {
+        "class": "Desarrollador",
+        "nombre": "Carlos Pérez",
+        "idEmpleado": 2001,
+        "salarioBase": 3456,
+        "lenguajePrincipal": "PHP",
+        "nivel": "senior"
+    },
+    {
+        "class": "Desarrollador",
+        "nombre": "María Ruiz",
+        "idEmpleado": 2002,
+        "salarioBase": 2222,
+        "lenguajePrincipal": "JavaScript",
+        "nivel": "junior"
+    }
+]
