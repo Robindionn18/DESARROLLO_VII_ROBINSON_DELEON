@@ -11,6 +11,14 @@ function sanitizarEdad($edad) {
     return filter_var($edad, FILTER_SANITIZE_NUMBER_INT);
 }
 
+function sanitizarFechaNacimiento($fecha){
+    return filter_var(trim($fecha), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+}
+
+function santizarFecha($fecha){
+    return filter_var($fecha, FILTER_SANITIZE_STRING);
+}
+
 function sanitizarSitioWeb($sitioWeb) {
     return filter_var(trim($sitioWeb), FILTER_SANITIZE_URL);
 }

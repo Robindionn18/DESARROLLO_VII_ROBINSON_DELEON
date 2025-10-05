@@ -8,9 +8,19 @@ function validarEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-function validarEdad($edad) {
-    return is_numeric($edad) && $edad >= 18 && $edad <= 120;
+function validarFechaNacimiento($fecha) {
+    if (empty($fecha)) return false;
+
+    $fechaNacimiento = DateTime::createFromFormat('Y-m-d', $fecha);
+    if (!$fechaNacimiento) return false;
+
+    $hoy = new DateTime();
+    $edad = $hoy->diff($fechaNacimiento)->y;
+
+    // Validar edad mínima y máxima
+    return ($edad >= 18 && $edad <= 120);
 }
+
 
 function validarSitioWeb($sitioWeb) {
     return empty($sitioWeb) || filter_var($sitioWeb, FILTER_VALIDATE_URL);
