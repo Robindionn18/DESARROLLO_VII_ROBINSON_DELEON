@@ -1,0 +1,8 @@
+CREATE TABLE books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    relase_at_library TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    release_date TIMESTAMP NULL,
+    aviable BOOLEAN DEFAULT TRUE
+);
