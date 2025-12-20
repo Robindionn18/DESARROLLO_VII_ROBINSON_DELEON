@@ -33,3 +33,4 @@ if (session_status() === PHP_SESSION_NONE) {
         <a href="/TALLERES/PROYECTO_FINAL/logout.php" style="color:red;">Salir</a>
     <?php endif; ?>
 </nav>
+

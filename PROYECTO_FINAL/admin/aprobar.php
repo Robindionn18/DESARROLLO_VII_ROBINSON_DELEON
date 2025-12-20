@@ -19,7 +19,7 @@ require_once '../ProjectManager.php';
 $pm = new ProjectManager();
 
 // Aprobar reserva (7 días por defecto)
-$pm->approveReservation($_GET['id'], 7);
+$pm->approveReservation($_GET['id'], );
 
 // Volver a la lista
 header("Location: reservas.php");

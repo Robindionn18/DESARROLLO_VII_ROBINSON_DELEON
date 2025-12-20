@@ -22,25 +22,34 @@ $total  = $pm->getTotalFines($_SESSION['user_id']);
 <?php if ($total == 0): ?>
     <p>No tienes multas pendientes.</p>
 <?php else: ?>
-<table border="1" cellpadding="5">
+
+<table border="1">
 <tr>
+    <th>Libro</th>
     <th>Motivo</th>
     <th>Monto</th>
-    <th>Estado</th>
     <th>Acción</th>
 </tr>
 
+<?php if (!empty($multas)): ?>
 <?php foreach ($multas as $m): ?>
 <tr>
+    <td><?= $m['title'] ?? 'Libro eliminado' ?></td>
     <td><?= $m['reason'] ?></td>
     <td>$<?= $m['fine_amount'] ?></td>
-    <td>Pendiente</td>
     <td>
-        <a href="pagar_multa.php?id=<?= $m['id'] ?>">Pagar</a>
+        <form method="post" action="pagar_multas.php">
+            <input type="hidden" name="id" value="<?= $m['id'] ?>">
+            <button type="submit">Pagar</button>
+        </form>
     </td>
 </tr>
 <?php endforeach; ?>
+<?php endif; ?>
+
 </table>
 
-<strong>Total: $<?= $total ?></strong>
+<p><strong>Total a pagar:</strong> $<?= $total ?></p>
+
 <?php endif; ?>
+

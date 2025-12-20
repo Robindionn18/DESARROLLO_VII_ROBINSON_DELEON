@@ -225,17 +225,36 @@ class ProjectManager {
 
     //(Fechas y Devoluciones)Devolver Libro
     public function returnBook($loanId) {
+
+    // Obtener préstamo
+    $stmt = $this->db->prepare("SELECT * FROM loans WHERE id = ? AND status = 'active'");
+    $stmt->execute([$loanId]);
+    $loan = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$loan) return false;
     // Marcar devolución
-    $stmt = $this->db->prepare("UPDATE loans SET return_date = CURDATE() WHERE id = ?");
+    $stmt = $this->db->prepare("UPDATE loans SET status = 'returned', return_date = NOW() WHERE id = ?");
     $stmt->execute([$loanId]);
 
-    // Obtener libro
-    $stmt = $this->db->prepare("SELECT book_id FROM loans WHERE id = ?");
-    $stmt->execute([$loanId]);
-    $bookId = $stmt->fetchColumn();
-    // Volver a marcar libro como disponible
+    // Liberar libro
     $stmt = $this->db->prepare("UPDATE books SET aviable = 1 WHERE id = ?");
-    return $stmt->execute([$bookId]);
+    $stmt->execute([$loan['book_id']]);
+    // Calcular atraso
+    $due = new DateTime($loan['due_date']);
+    $now = new DateTime();
+
+    if ($now > $due) {
+        $daysLate = $due->diff($now)->days;
+        $fineAmount = $daysLate * 1.50; // $1.50 por día (ajustable)
+        // Crear multa
+        $stmt = $this->db->prepare("INSERT INTO fines (user_id, loan_id, fine_amount, reason, status) VALUES (?, ?, ?, 'Atraso en devolución', 'pending')");
+        $stmt->execute([
+            $loan['user_id'],
+            $loanId,
+            $fineAmount
+        ]);
+    }
+
+    return true;
 }
 
     //(Fechas y Devoluciones)Estado de Devolucion (Mejorado)
@@ -317,10 +336,17 @@ class ProjectManager {
 
     //(Multas y Sanciones)Obtener multas de usuario
     public function getUserFines($userId) {
-    $stmt = $this->db->prepare("SELECT * FROM fines WHERE user_id = ? AND is_paid = 0");
+    $stmt = $this->db->prepare(
+        "SELECT f.*, b.title
+         FROM fines f
+         LEFT JOIN loans l ON l.id = f.loan_id
+         LEFT JOIN books b ON b.id = l.book_id
+         WHERE f.user_id = ? AND f.status = 'pending'"
+    );
     $stmt->execute([$userId]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+}
+
 
 
     //(Multas y Sanciones)Duracion de la multa
@@ -331,34 +357,37 @@ class ProjectManager {
     }
 
     //(Multas y Sanciones)Total de la Multa
-    public function getTotalFines($userId) {
+   public function getTotalFines($userId) {
     $stmt = $this->db->prepare(
-        "SELECT SUM(fine_amount) FROM fines
-         WHERE user_id = ? AND is_paid = 0"
+        "SELECT SUM(fine_amount) AS total_fines 
+         FROM fines 
+         WHERE user_id = ? AND status = 'pending'"
     );
     $stmt->execute([$userId]);
     return $stmt->fetchColumn() ?? 0;
-    }
+}
+
 
 
     //(Multas y Sanciones)Pagar Multa
-    public function payFine($fineId) {
-    $stmt = $this->db->prepare(
-        "UPDATE fines SET is_paid = 1 WHERE id = ?"
-    );
-    return $stmt->execute([$fineId]);
-    }
+    public function payFine($fineId, $userId) {
+    $stmt = $this->db->prepare("UPDATE fines SET status = 'paid', paid_at = NOW() WHERE id = ? AND user_id = ?");
+    return $stmt->execute([$fineId, $userId]);
+}
+
 
     //(Multas y Sanciones)Ver todas las multas (Admin)
     public function getAllFines() {
     $stmt = $this->db->query(
         "SELECT f.*, u.first_name, u.last_name, b.title
          FROM fines f
-         JOIN users u ON u.id = f.user_id
+         LEFT JOIN users u ON u.id = f.user_id
          LEFT JOIN loans l ON l.id = f.loan_id
          LEFT JOIN books b ON b.id = l.book_id
-         ORDER BY f.is_paid ASC, f.imposed_date DESC"
+         ORDER BY f.created_at DESC"
     );
+
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+}
+
 }
